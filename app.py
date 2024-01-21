@@ -1,7 +1,6 @@
 import streamlit as st
 from clarifai.client.model import Model
 import base64
-from dotenv import load_dotenv
 from PIL import Image
 
 clarifai_pat = st.secrets["CLARIFAI_PAT"]
