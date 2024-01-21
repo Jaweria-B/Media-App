@@ -3,12 +3,8 @@ from clarifai.client.model import Model
 import base64
 from dotenv import load_dotenv
 from PIL import Image
-from io import BytesIO
 
-load_dotenv()
-import os
-
-clarifai_pat = os.getenv("CLARIFAI_PAT")
+clarifai_pat = st.secrets["CLARIFAI_PAT"]
 # openai_api_key = os.getenv("OPEN_AI")
 
 def generate_image(user_description):
