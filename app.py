@@ -73,7 +73,7 @@ def main():
         
         # Check if user has exceeded free usage
         if st.session_state['terms'] < 4 or st.session_state['is_usr_key']:
-            generate_image_btn = st.button("Generate Image")
+            generate_image_btn = st.button("Generate Story")
             if generate_image_btn:
                 st.session_state['terms'] += 1
                 # print(st.session_state["terms"])
