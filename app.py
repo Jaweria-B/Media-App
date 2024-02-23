@@ -56,7 +56,7 @@ def main():
         st.session_state['is_usr_key'] = False
 
     # Check if user has exceeded free usage
-    if st.session_state['terms'] >= 1:
+    if st.session_state['terms'] >= 3:
         st.sidebar.header("Enter Your CLARIFAI PAT Key")
         clarifai_pat_usr = st.sidebar.text_input("CLARIFAI PAT Key")
         if clarifai_pat_usr:
@@ -72,7 +72,7 @@ def main():
         image_description = st.text_area("Description for Image Generation", height=100)
         
         # Check if user has exceeded free usage
-        if st.session_state['terms'] < 2 or st.session_state['is_usr_key']:
+        if st.session_state['terms'] < 4 or st.session_state['is_usr_key']:
             generate_image_btn = st.button("Generate Image")
             if generate_image_btn:
                 st.session_state['terms'] += 1
@@ -84,7 +84,7 @@ def main():
         st.header("Comic Art")
         
         # Check if user has exceeded free usage
-        if (st.session_state['terms'] < 2 or st.session_state['is_usr_key']) and generate_image_btn and image_description:
+        if (st.session_state['terms'] < 4 or st.session_state['is_usr_key']) and generate_image_btn and image_description:
             with st.spinner("Generating image..."):
                 image_path = generate_image(image_description)
                 if image_path:
@@ -96,14 +96,14 @@ def main():
                     st.success("Image generated!")
                 else:
                     st.error("Failed to generate image.")
-        elif (st.session_state['terms'] >= 1 and not st.session_state['is_usr_key']):
+        elif (st.session_state['terms'] >= 3 and not st.session_state['is_usr_key']):
             st.error("You have reached the maximum try limit!\nEnter your PAT key to continue.")
 
     with col2:
         st.header("Story")
         
         # Check if user has exceeded free usage
-        if (st.session_state['terms'] < 2 or st.session_state['is_usr_key']) and generate_image_btn and image_description:
+        if (st.session_state['terms'] < 4 or st.session_state['is_usr_key']) and generate_image_btn and image_description:
             with st.spinner("Creating a story..."):
                 base64_image = encode_image(image_path)
                 understood_text = understand_image(base64_image)
