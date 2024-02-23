@@ -76,7 +76,7 @@ def main():
             generate_image_btn = st.button("Generate Image")
             if generate_image_btn:
                 st.session_state['terms'] += 1
-                print(st.session_state["terms"])
+                # print(st.session_state["terms"])
 
     col1, col2 = st.columns(2)
 
