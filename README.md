@@ -36,6 +36,10 @@ Welcome to **StoryVerse AI**! This innovative media application leverages state-
 4. **Open Your Browser:**
    Visit [http://localhost:8501](http://localhost:8501) to explore the app.
 
+## Live Demo
+
+Check out the live demo [here](https://storyverse-ai.streamlit.app/).
+
 ## Usage
 
 1. Input your desired content through the app's user interface.
@@ -49,6 +53,8 @@ Welcome to **StoryVerse AI**! This innovative media application leverages state-
 Contributions are welcome! If you have ideas for improvements, feature requests, or find any issues, feel free to open an issue or submit a pull request.
 
 ## Acknowledgments
+
+- This project was inspired by the article "[Crafting Engaging Stories with AI: Building an Interactive Media App](https://lablab.ai/t/crafting-engaging-stories-with-ai-building-an-interactive-media-app)" published on lablab.ai. I thank the authors for their insightful guidance and ideas that contributed to the development of StoryVerse AI.
 
 - Special thanks to OpenAI for providing cutting-edge AI models.
 - [Clarifai](https://www.clarifai.com/) for their image recognition capabilities.
