@@ -110,6 +110,15 @@ def main():
                 audio_base64 = text_to_speech(understood_text)
                 st.audio(audio_base64, format="audio/mp3")
                 st.success("Audio generated from image understanding!")
+    st.write(
+            """
+            Made By **_Jaweria Batool_**
+            """
+        )
+
+        # link to GitHub README file
+    st.write("For more information about how the app works, please check out the [GitHub README](https://github.com/Jaweria-B/Media-App) file.")
+
         
 
 if __name__ == "__main__":
