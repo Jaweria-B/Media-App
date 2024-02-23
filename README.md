@@ -2,6 +2,10 @@
 
 Welcome to **StoryVerse AI**! This innovative media application leverages state-of-the-art AI models to turn your input into a unique visual and auditory experience. Generate captivating stories with images, text, and audio effortlessly.
 
+<p align="center">
+  <img src="./assets/logo.png" alt="StoryVerse AI Logo" height="200">
+</p>
+
 ## Features
 
 - **DALL·E-3 Image Generation:** Transform textual input into a series of imaginative images using the DALL·E-3 model.
@@ -9,6 +13,7 @@ Welcome to **StoryVerse AI**! This innovative media application leverages state-
 - **Text-to-Speech Integration:** Convert your generated stories into immersive audio experiences using advanced Text-to-Speech technology.
 - **Clarifai Integration:** Leverage Clarifai for additional image analysis or content moderation, enhancing the overall user experience.
 - **Streamlit User Interface:** Enjoy a user-friendly interface powered by Streamlit for seamless interaction.
+- **Usage Limits:** Users can generate free stories and images three times. After reaching the limit, they need to provide their own Clarifai PAT key for continued usage.
 
 ## Getting Started
 
@@ -41,8 +46,7 @@ Welcome to **StoryVerse AI**! This innovative media application leverages state-
 
 ## Contributing
 
-Contributions are welcome! If you have ideas for improvements, feature requests, or find any issues, feel free to open an issue or submit a pull request. 
-
+Contributions are welcome! If you have ideas for improvements, feature requests, or find any issues, feel free to open an issue or submit a pull request.
 
 ## Acknowledgments
 
