@@ -48,7 +48,10 @@ def text_to_speech(input_text):
 
 def main():
     st.set_page_config(page_title="Interactive Media Creator", layout="wide")
-    st.title("Interactive Media Creator")
+    st.title("StoryVerse AI")
+    st.write("""
+    * Generate captivating stories accompanied by stunning visuals and immersive audio
+    """)
 
     # Initialize session variable 'terms' to keep track of free usage
     if 'terms' not in st.session_state:
