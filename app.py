@@ -3,9 +3,9 @@ from clarifai.client.model import Model
 import base64
 from PIL import Image
 
-clarifai_pat = st.secrets["CLARIFAI_PAT"]
 # openai_api_key = os.getenv("OPEN_AI")
 
+# Function to generate image using Clarifai DALL-E model
 def generate_image(user_description):
     prompt = f"You are a professional comic artist. Based on the below user's description and content, create a proper story comic: {user_description}"
     inference_params = dict(quality="standard", size="1024x1024")
@@ -19,6 +19,7 @@ def generate_image(user_description):
         f.write(output_base64)
     return "generated_image.png"
 
+# Function to understand image and generate story using Clarifai GPT-4 Vision model
 def understand_image(base64_image):
     prompt = "Analyze the content of this image and write a creative, engaging story that brings the scene to life. Describe the characters, setting, and actions in a way that would captivate a young audience:"
     inference_params = dict(temperature=0.2, image_base64=base64_image)
@@ -29,10 +30,12 @@ def understand_image(base64_image):
     )
     return model_prediction.outputs[0].data.text.raw
 
+# Function to encode image to base64
 def encode_image(image_path):
     with open(image_path, "rb") as image_file:
         return base64.b64encode(image_file.read()).decode("utf-8")
 
+# Function to convert text to speech
 def text_to_speech(input_text):
     inference_params = dict(voice="alloy", speed=1.0)
     model_prediction = Model(
@@ -47,16 +50,41 @@ def main():
     st.set_page_config(page_title="Interactive Media Creator", layout="wide")
     st.title("Interactive Media Creator")
 
+    # Initialize session variable 'terms' to keep track of free usage
+    if 'terms' not in st.session_state:
+        st.session_state['terms'] = 0
+        st.session_state['is_usr_key'] = False
+
+    # Check if user has exceeded free usage
+    if st.session_state['terms'] >= 1:
+        st.sidebar.header("Enter Your CLARIFAI PAT Key")
+        clarifai_pat_usr = st.sidebar.text_input("CLARIFAI PAT Key")
+        if clarifai_pat_usr:
+            clarifai_pat = clarifai_pat_usr
+            st.session_state['is_usr_key'] = True  # Store user-entered key
+        else:
+            st.sidebar.warning("Enter your PAT key to continue!", icon="⚠️")
+    else:
+        clarifai_pat = st.secrets["CLARIFAI_PAT"]
+
     with st.sidebar:
         st.header("Controls")
         image_description = st.text_area("Description for Image Generation", height=100)
-        generate_image_btn = st.button("Generate Image")
+        
+        # Check if user has exceeded free usage
+        if st.session_state['terms'] < 2 or st.session_state['is_usr_key']:
+            generate_image_btn = st.button("Generate Image")
+            if generate_image_btn:
+                st.session_state['terms'] += 1
+                print(st.session_state["terms"])
 
     col1, col2 = st.columns(2)
 
     with col1:
         st.header("Comic Art")
-        if generate_image_btn and image_description:
+        
+        # Check if user has exceeded free usage
+        if (st.session_state['terms'] < 2 or st.session_state['is_usr_key']) and generate_image_btn and image_description:
             with st.spinner("Generating image..."):
                 image_path = generate_image(image_description)
                 if image_path:
@@ -68,16 +96,21 @@ def main():
                     st.success("Image generated!")
                 else:
                     st.error("Failed to generate image.")
+        elif (st.session_state['terms'] >= 1 and not st.session_state['is_usr_key']):
+            st.error("You have reached the maximum try limit!\nEnter your PAT key to continue.")
 
     with col2:
         st.header("Story")
-        if generate_image_btn and image_description:
+        
+        # Check if user has exceeded free usage
+        if (st.session_state['terms'] < 2 or st.session_state['is_usr_key']) and generate_image_btn and image_description:
             with st.spinner("Creating a story..."):
                 base64_image = encode_image(image_path)
                 understood_text = understand_image(base64_image)
                 audio_base64 = text_to_speech(understood_text)
                 st.audio(audio_base64, format="audio/mp3")
                 st.success("Audio generated from image understanding!")
+        
 
 if __name__ == "__main__":
     main()

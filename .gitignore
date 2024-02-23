@@ -9,6 +9,9 @@
 /coverage
 .streamlit
 
+# generated-image
+/generated_image.png
+
 # production
 /build
 
